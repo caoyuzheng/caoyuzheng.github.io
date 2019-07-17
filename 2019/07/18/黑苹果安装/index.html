@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="caoyuzheng">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="黑苹果安装">
+  <meta property="og:description" content>
+  <meta property="og:site_name" content="Keep It Simple Do It Well">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="http://yoursite.com">
+  
+    <link rel="alternate" href="/atom.xml" title="Keep It Simple Do It Well" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Keep It Simple Do It Well</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">黑苹果安装</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/caoyuzheng">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:2846291929@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By caoyuzheng</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-07-18</span>
+            <span class="time">01:44:23</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/开发技巧/">开发技巧</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Hackintosh/">#Hackintosh</a> <a class="tag" href="/tags/驱动/">#驱动</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p>爬了很多贴，总算基本可以用了，期间重启了不知多少次，有几次以为电脑都没救要重置了😂，所以还是要备份好COLVER和细心点。<a id="more"></a></p>
+<h3 id="安装系统部分"><a class="header-anchor" href="#安装系统部分">¶</a>安装系统部分</h3>
+<blockquote>
+<p>参照http://bbs.pcbeta.com/viewthread-1807222-1-1.html</p>
+</blockquote>
+<ol>
+<li>空出一整个磁盘用于mac安装，并在磁盘管理中格式化磁盘</li>
+</ol>
+<ol start="2">
+<li>
+<p>下载<a href="https://www.macxin.com/archives/10005.html" target="_blank" rel="noopener">macOS Mojave 10.14.5(18F132) Installer with Clover 4928</a></p>
+</li>
+<li>
+<p>下载<a href="https://github.com/balena-io/etcher/releases" target="_blank" rel="noopener">etcher</a>，打开etcher，选择镜像，插入u盘，点击flash制作mac系统安装镜像</p>
+</li>
+<li>
+<p>重启，按ESC键进BIOS，在启动选项里关闭安全启动模式</p>
+</li>
+<li>
+<p>进入clover界面，开始安装mac</p>
+</li>
+<li>
+<p>选择磁盘工具，然后选之前空出的磁盘，点击抹除，选择Mac OS扩展（日志式），开始格式化磁盘</p>
+</li>
+<li>
+<p>关闭磁盘工具，选择“安装macOS”进行安装</p>
+</li>
+<li>
+<p>下载<a href="http://www.diskgenius.cn" target="_blank" rel="noopener">DiskGenius</a>磁盘管理工具，将U盘的CLOVER文件夹复制到Windows系统的EFI文件夹下</p>
+</li>
+<li>
+<p>下载<a href="https://easyuefi.en.softonic.com" target="_blank" rel="noopener">EasyUEFI</a>，新建并设置Mac开机引导项指向COLVER下的<code>CLOVERX64.efi</code>，实现不需U盘的启动</p>
+</li>
+</ol>
+<hr>
+<h3 id="安装驱动部分"><a class="header-anchor" href="#安装驱动部分">¶</a>安装驱动部分</h3>
+<p><strong>显卡</strong></p>
+<p>  下载<a href="https://mackie100projects.altervista.org/download-clover-configurator/" target="_blank" rel="noopener">Clover Configurator Mac版</a>，它是一款图形化的四叶草启动引导配置工具。打开后选择挂载分区，之后打开访达就可以看到EFI分区，在CLOVER文件夹中有不同显卡的配置文件，比如我的是HD5500，将配置文件改名为<code>config.plist</code>即可。</p>
+<p><strong>无线网卡</strong></p>
+<p>  我的网卡为intel的，无解，买了个无线网卡</p>
+<p><strong>声卡</strong></p>
+<blockquote>
+<p>参照：<a href="https://osx.cx/applealc-for-mac.html" target="_blank" rel="noopener">https://osx.cx/applealc-for-mac.html</a></p>
+</blockquote>
+<ol>
+<li>下载最新的 <a href="https://github.com/acidanthera/Lilu/releases" target="_blank" rel="noopener">Lilu</a> + <a href="https://github.com/acidanthera/AppleALC/releases" target="_blank" rel="noopener">AppleALC</a>，复制到CLOVER/kexts/Other文件夹下进行安装。</li>
+</ol>
+<ol start="2">
+<li>
+<p>在Clover Configurator中，选择设备设置，在Audio的注入（inject）选项输入声卡的ID。</p>
+</li>
+<li>
+<p>在设备管理器中，根据声卡的设备id查看自己声卡的型号，其中<code>VEN_***</code>表示厂商，<code>DEV_***</code>表示产品编号，根据声卡型号查看<a href="https://github.com/acidanthera/AppleALC/wiki/Supported-codecs" target="_blank" rel="noopener">声卡的ID</a></p>
+</li>
+</ol>
+<p><strong>电池</strong></p>
+<blockquote>
+<p>参照：<a href="https://www.geekcj.com/333.html" target="_blank" rel="noopener">https://www.geekcj.com/333.html</a></p>
+</blockquote>
+<p>  写的敲好啊，一遍通过，就是过程比较复杂</p>
+<p><strong>调节亮度</strong></p>
+<blockquote>
+<p>参照：<a href="https://www.douban.com/note/526541270/?type=rec" target="_blank" rel="noopener">https://www.douban.com/note/526541270/?type=rec</a></p>
+</blockquote>
+<ol>
+<li>要注意DSDT打补丁时，由于显卡是HD5500，要选Brightness fix (Haswell/Broadwell)，开启水波纹在系统偏好设置-调度中心-仪表盘-作为叠层</li>
+</ol>
+<ol start="2">
+<li>以上方法试了如果不行，可以下载个<a href="http://www.pc6.com/mac/557366.html" target="_blank" rel="noopener">黑苹果屏幕亮度调节工具</a>试试，插上USB键盘后，在系统偏好设置-键盘-快捷键中会出现“显示器”的快捷键，可以设置调节亮度的快捷键</li>
+</ol>
+<p><strong>触控板</strong></p>
+<blockquote>
+<p>参照：<a href="https://www.haolie.net/post/692.html" target="_blank" rel="noopener">https://www.haolie.net/post/692.html</a></p>
+</blockquote>
+<ol>
+<li>触摸板不能单击，在系统偏好设置-触控板将“轻点来点按”勾选上。</li>
+</ol>
+<ol start="2">
+<li>不能双击拖动文件，在设置辅助功能，触摸板设置启动拖移。</li>
+</ol>
+<hr>
+<h3 id="附加"><a class="header-anchor" href="#附加">¶</a>附加</h3>
+<p><strong>误删Windows EFI</strong></p>
+<ol>
+<li>
+<p>使用<a href="http://www.pc6.com/mac/111913.html" target="_blank" rel="noopener">Daemon tools</a>在Mac下制作Windows或PE的安装盘</p>
+</li>
+<li>
+<p>进入安装界面，选择修复系统，然后打开命令行界面</p>
+</li>
+<li>
+<p>代码：</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">diskpart</span><br><span class="line">list diskt</span><br><span class="line">select disk * list partition</span><br><span class="line">create partition efi size = 100M</span><br><span class="line">format quick fs = fat32    //EFI分区格式为fat32</span><br><span class="line">assign letter=q     //分配驱动器号和装载点</span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">bcdboot c:windows /s q: /f uefi /l zh-cn</span><br></pre></td></tr></table></figure>
+<p>其中：<br>
+/s t: 指定esp分区所在磁盘<br>
+/f uefi 指定启动方式为uefi<br>
+/l zh-cn 指定uefi启动界面语言为简体中文</p>
+<p><strong>Apple ID不能用</strong></p>
+<p>  第一次用Apple ID登陆Apple Store时需要验证，但总不通过，需要联系官方，打开<a href="https://getsupport.apple.com/?caller=cups" target="_blank" rel="noopener">联系支持</a>页面，点击“Apple ID”，点击“iTunes Store与App Store”，选择“账户验证相关问题”，点击“电子邮件”就可以了，72小时内会解决的。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
