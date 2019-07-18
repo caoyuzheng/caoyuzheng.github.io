@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content>
+  <meta name="author" content="caoyuzheng">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="https原理和使用Certbot配置https数字证书">
+  <meta property="og:description" content>
+  <meta property="og:site_name" content="Keep It Simple Do It Well">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="http://yoursite.com">
+  
+    <link rel="alternate" href="/atom.xml" title="Keep It Simple Do It Well" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>Keep It Simple Do It Well</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">https原理和使用Certbot配置https数字证书</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/caoyuzheng">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:2846291929@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By caoyuzheng</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2019-07-18</span>
+            <span class="time">23:11:58</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/基础知识/">基础知识</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/https/">#https</a> <a class="tag" href="/tags/数字证书/">#数字证书</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <p><strong>数字证书</strong></p>
+<p>服务端发送自己的公钥给CA（认证中心），CA先生成公钥的摘要，然后用自己的私钥对服务端的摘要进行加密，生成签名，之后将签名和服务端公钥作为数字证书发给服务端。<a id="more"></a></p>
+<p>当服务端将数字证书发给客户端时，客户端用CA的公钥解密后得到服务端的公钥的摘要。</p>
+<p>之后客户端生成公钥的摘要，并与解密的摘要对比，就可以判断公钥信息的正确性。</p>
+<p><strong>HTTPS通信过程</strong></p>
+<p>非对称加密是用来加密密钥，对称加密用来加密数据。</p>
+<p>首先客户端请求服务端的443端口。</p>
+<p>服务端有一对密钥，公钥和私钥，用做非对称加密的密钥。为了保证公钥不被篡改，要从CA获取数字证书。服务端将数字证书发给客户端。</p>
+<p>客户端对数字证书进行检查使用CA公钥进行校验。</p>
+<p>如果合法，客户端会生成一个随机字符串，用做对称加密的密钥。并用服务端的公钥对该密钥进行加密。</p>
+<p>客户端发起第二次请求，将加密后的密钥发给服务端。</p>
+<p>服务端用私钥解密后，就得到了客户端的密钥。</p>
+<p>服务端用该密钥加密数据后发送给客户端。</p>
+<p>客户端用该密钥解密数据，结束一次通信过程。</p>
+<p><strong>Certbot配置https数字证书</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum -y install yum-utils</span><br><span class="line">yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional</span><br><span class="line">yum install certbot python2-certbot-nginx</span><br><span class="line">pip install urllib3</span><br><span class="line">certbot --nginx</span><br></pre></td></tr></table></figure>
+<p>错误：ImportError: ‘pyOpenSSL’ module missing required functionality. Try upgrading to v0.14 or newer.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade --force-reinstall &apos;requests==2.6.0&apos;</span><br></pre></td></tr></table></figure>
+<p>nginx配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       443 ssl;</span><br><span class="line">        server_name  rov-lab.top www.rov-lab.top;</span><br><span class="line"></span><br><span class="line">        ssl_certificate    /etc/letsencrypt/live/rov-lab.top/fullchain.pem;</span><br><span class="line">        ssl_certificate_key  /etc/letsencrypt/live/rov-lab.top/privkey.pem;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location /api &#123;</span><br><span class="line">            proxy_pass http://127.0.0.1:8080/api;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   /root/html/;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">            try_files $uri $uri/ /index.html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name rov-lab.top www.rov-lab.top;</span><br><span class="line">    rewrite ^(.*)$  https://$server_name$1 permanent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
